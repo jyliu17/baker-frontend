@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import BakersList from "./BakersList";
 
+
 function App() {
   // const [currentUser, setCurrentUser] = useState(null);
 
@@ -36,7 +37,7 @@ function App() {
       <main>
         <Switch>
           <Route path="/home">
-            <BakersList bakersState={bakersState} />
+            <BakersList bakersState={bakersState} API={API} />
           </Route>
         </Switch>
       </main>

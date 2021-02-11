@@ -1,6 +1,7 @@
 import React from "react"
 
-function BakerPage() {
+function BakerPage({ baker }) {
+
     return(
         <div>
             <h3>page</h3>
