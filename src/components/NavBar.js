@@ -5,7 +5,7 @@ function NavBar({ currentUser }) {
   return (
     <header>
       <div>
-        <NavLink to="/home">Bakers</NavLink>
+        <NavLink to="/bakers">Bakers</NavLink>
       </div>
     </header>
   );

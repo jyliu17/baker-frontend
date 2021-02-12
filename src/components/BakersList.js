@@ -1,11 +1,10 @@
 import React from "react";
 import Baker from "./Baker"
-import { Switch, Route } from "react-router-dom";
 
-function BakersList({ bakersState, API }) {
+function BakersList({ bakersState }) {
 
   const bakersDisplay = bakersState.map((baker => {
-    return <Baker key={baker.id} baker={baker} API={API} />
+    return <Baker key={baker.id} baker={baker} />
   }))
   return (
     <>
@@ -16,4 +15,4 @@ function BakersList({ bakersState, API }) {
 
 }
 
-export default BakersList
+export default BakersList;

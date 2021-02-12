@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import BakersList from "./BakersList";
+import BakerPage from "./BakerPage";
 
 
 function App() {
@@ -29,16 +30,20 @@ function App() {
     .then(bakersArray => (setBakersState(bakersArray)))
   }, []);
   
-  console.log(bakersState);
+  // console.log(bakersState);
 
   return (
     <>
       <NavBar />
       <main>
         <Switch>
-          <Route path="/home">
+           <Route path="/bakers/:id">
+              <BakerPage />
+          </Route>
+          <Route path="/bakers">
             <BakersList bakersState={bakersState} API={API} />
           </Route>
+         
         </Switch>
       </main>
     </>
