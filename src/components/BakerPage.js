@@ -2,21 +2,34 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function BakerPage() {
-  const [baker, setBaker] = useState(null);
-  console.log(baker);
 
   const {id} = useParams();
+
+  const [bakerObj, setBakerObj] = useState({});
+  const [pastries, setPastries] = useState([])
+   // const [isLoaded, setIsLoaded] = useState(false);
+  
+  console.log(id);
 
   useEffect(() => {
     fetch(`http://localhost:3000/bakers/${id}`)
       .then((r) => r.json())
-      .then((baker) => {
-        setBaker(baker);
-      });
+      .then((obj) => {setBakerObj(obj)
+        setPastries(obj.pastries)
+      }
+      ); 
   }, [id]);
 
-  const { name, location, contact, profile_image, expertise } = baker;
-//   , pastries
+  console.log(pastries);
+
+
+ 
+  // if (!isLoaded) return <h2>Loading...</h2>;
+
+
+// console.log(bakerObj.pastries);
+
+const { name, location, contact, profile_image, expertise } = bakerObj;
 
   return (
     <section>
@@ -26,15 +39,15 @@ function BakerPage() {
         <p> Expertise: {expertise}</p>
         <p> Location: {location}</p>
         <a> Contact: {contact}</a>
-        {/* <div>
+        <div>
           {pastries.map((p) => (
-            <ul key={p.id}>
-              <li>{p.name}</li>
+            <div key={p.id}>
+              <h3>{p.name}</h3>
               <img src={p.image} alt={p.name} />
-              <li>{p.description}</li>
-            </ul>
+              <p>{p.description}</p>
+            </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </section>
   );

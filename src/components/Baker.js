@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Baker({ baker }) {
-    let { id, name, location, contact, profile_image, expertise } = baker;
-    // , pastries
+    const { id, name, location, contact, profile_image, expertise} = baker;
+    
     return (
         <div>
             <h3>{name}</h3>
