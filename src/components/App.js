@@ -6,6 +6,9 @@ import BakerPage from "./BakerPage";
 
 
 function App() {
+
+
+ 
   // const [currentUser, setCurrentUser] = useState(null);
 
   // // autologin
@@ -31,6 +34,11 @@ function App() {
   }, []);
   
   // console.log(bakersState);
+  const [bakerSearch, setBakerSearch] = useState("")
+
+  const filteredBakers = bakersState.filter((baker) => {
+    return baker.name.toLowerCase().includes(bakerSearch.toLowerCase())
+  })
 
   return (
     <>
@@ -41,7 +49,7 @@ function App() {
               <BakerPage />
           </Route>
           <Route path="/bakers">
-            <BakersList bakersState={bakersState} API={API} />
+            <BakersList bakersState={filteredBakers} bakerSearch={bakerSearch} setBakerSearch={setBakerSearch} />
           </Route>
          
         </Switch>
