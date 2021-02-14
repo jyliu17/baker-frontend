@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function BakerPage() {
+function BakerPage({handleUpdateBaker}) {
 
   const {id} = useParams();
 
   const [bakerObj, setBakerObj] = useState({});
   const [pastries, setPastries] = useState([])
+  const [updatedLocation, setUpdatedLocation] = useState("");
    // const [isLoaded, setIsLoaded] = useState(false);
   
   console.log(id);
@@ -40,6 +41,9 @@ const { name, location, contact, profile_image, expertise } = bakerObj;
         <p> Location: {location}</p>
         <a> Contact: {contact}</a>
         <div>
+        <div>
+          <button>Update Info</button>
+        </div>
           {pastries.map((p) => (
             <div key={p.id}>
               <h3>{p.name}</h3>

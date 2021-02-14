@@ -50,13 +50,24 @@ function App() {
     setShowForm(showForm => !showForm)
   }
 
+  function handleUpdateBaker(updatedBaker){
+    const updatedBakerList = bakersState.map((baker) => {
+      if (baker.id === updatedBaker.id) {
+        return updatedBaker;
+      } else {
+        return bakersState; 
+      }
+    });
+    setBakersState(updatedBakerList);
+  }
+
   return (
     <>
       <NavBar />
       <main>
         <Switch>
            <Route path="/bakers/:id">
-              <BakerPage />
+              <BakerPage handleUpdateBaker={handleUpdateBaker}/>
           </Route>
           <Route path="/bakers">
             <BakersList bakersState={filteredBakers} 
