@@ -26,6 +26,8 @@ function App() {
   // console.log(currentUser);
   const API = "http://localhost:3000/bakers";
   const [bakersState, setBakersState] = useState([]);
+  const [showForm, setShowForm] = useState(false)
+  const [bakerSearch, setBakerSearch] = useState("")
 
   useEffect(() => {
     fetch(API)
@@ -34,11 +36,19 @@ function App() {
   }, []);
   
   // console.log(bakersState);
-  const [bakerSearch, setBakerSearch] = useState("")
 
   const filteredBakers = bakersState.filter((baker) => {
     return baker.name.toLowerCase().includes(bakerSearch.toLowerCase())
   })
+
+  function handleAddBaker(newBaker){
+    const newBakerList = ([...bakersState, newBaker])
+    setBakersState(newBakerList)
+  }
+
+  function handleFormClick(){
+    setShowForm(showForm => !showForm)
+  }
 
   return (
     <>
@@ -49,7 +59,14 @@ function App() {
               <BakerPage />
           </Route>
           <Route path="/bakers">
-            <BakersList bakersState={filteredBakers} bakerSearch={bakerSearch} setBakerSearch={setBakerSearch} />
+            <BakersList bakersState={filteredBakers} 
+                        bakerSearch={bakerSearch} 
+                        setBakerSearch={setBakerSearch} 
+                        handleAddBaker={handleAddBaker}
+                        handleFormClick={handleFormClick}
+                        setShowForm={setShowForm}
+                        showForm={showForm}
+                        />
           </Route>
          
         </Switch>
