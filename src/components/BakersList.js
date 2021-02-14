@@ -14,8 +14,8 @@ function BakersList({ bakersState, bakerSearch, setBakerSearch, handleAddBaker, 
     <Search bakerSearch={bakerSearch} setBakerSearch={setBakerSearch}/>
     <br></br>
     <div className="sidebar">
-    {showForm ?<button onClick={handleFormClick}>New Baker form</button> : 
-               <button onClick={handleFormClick}>Hide Form</button> }
+    {showForm ?<button onClick={handleFormClick}>Hide Form</button> : 
+               <button onClick={handleFormClick}>New Baker form</button> }
     {showForm ? <NewBakerForm handleAddBaker={handleAddBaker}/> : null }
     </div>
       <h1>Our Talent Bakers</h1>
