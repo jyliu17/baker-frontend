@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import UpdateBakerForm from "./UpdateBakerForm"
 
 function BakerPage({handleUpdateBaker}) {
 
@@ -7,7 +8,7 @@ function BakerPage({handleUpdateBaker}) {
 
   const [bakerObj, setBakerObj] = useState({});
   const [pastries, setPastries] = useState([])
-  const [updatedLocation, setUpdatedLocation] = useState("");
+  
    // const [isLoaded, setIsLoaded] = useState(false);
   
   console.log(id);
@@ -43,6 +44,7 @@ const { name, location, contact, profile_image, expertise } = bakerObj;
         <div>
         <div>
           <button>Update Info</button>
+          <UpdateBakerForm handleUpdateBaker={handleUpdateBaker}/>
         </div>
           {pastries.map((p) => (
             <div key={p.id}>
