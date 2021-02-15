@@ -8,8 +8,9 @@ function BakerPage({handleUpdateBaker}) {
 
   const [bakerObj, setBakerObj] = useState({});
   const [pastries, setPastries] = useState([])
-  
-   // const [isLoaded, setIsLoaded] = useState(false);
+  const [showForm, setShowForm] = useState(false)
+
+ 
   
   console.log(id);
 
@@ -24,9 +25,11 @@ function BakerPage({handleUpdateBaker}) {
 
   console.log(pastries);
 
-
+  function handleFormClick(){
+    setShowForm(showForm => !showForm)
+  }
  
-  // if (!isLoaded) return <h2>Loading...</h2>;
+
 
 
 // console.log(bakerObj.pastries);
@@ -43,8 +46,9 @@ const { name, location, contact, profile_image, expertise } = bakerObj;
         <a> Contact: {contact}</a>
         <div>
         <div>
-          <button>Update Info</button>
-          <UpdateBakerForm handleUpdateBaker={handleUpdateBaker}/>
+        {showForm ? <button onClick={handleFormClick}>Hide Form</button> : 
+                    <button onClick={handleFormClick}>Update Info</button> }
+        {showForm ? <UpdateBakerForm handleUpdateBaker={handleUpdateBaker}/> : null }
         </div>
           {pastries.map((p) => (
             <div key={p.id}>
