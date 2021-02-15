@@ -6,6 +6,7 @@ function NavBar({ currentUser }) {
     <header>
       <div>
         <NavLink to="/bakers">Bakers</NavLink>
+        <NavLink to="/favorites">My Favorites</NavLink>
       </div>
     </header>
   );
