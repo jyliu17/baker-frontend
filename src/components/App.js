@@ -47,14 +47,14 @@ function App() {
     setFavoritesState(bakersIds);
   };
 
-  
+
   function handleAddFav(addedBaker) {
     // favIndex = addedBaker.id 
     // console.log(favArr[addedBaker.(Math(addedBaker.id - 1))]);
     // let arr = favArr.filter((f) => f.baker.id === addedBaker.id);
     // let favId = arr[0].id;
 
-    let objData = {user_id: parseInt('1'), baker_id: addedBaker.id};
+    let objData = { user_id: parseInt('1'), baker_id: addedBaker.id };
 
     fetch(`${favAPI}`, {
       method: 'POST',
@@ -63,20 +63,33 @@ function App() {
       },
       body: JSON.stringify(objData),
     })
-    .then(r => r.json())
-    .then(obj => console.log(obj))
+      .then(r => r.json())
+      .then(obj => console.log(obj))
 
     const newFavs = [...favoritesState, addedBaker];
     // console.log(newF)
     setFavoritesState(newFavs);
   };
 
-   
+
   function handleRemoveFav(removedBaker) {
     // console.log(newF)
+    let user2 = {
+      "id": 2,
+      "username": "noura",
+      "favorites": [{ "id": 3, "user_id": 2, "baker_id": 2 }, { "id": 4, "user_id": 2, "baker_id": 3 }]
+    };
+    let favToDelete = user.favorites.filter(fav => fav.baker_id === removedBaker.id);
+    console.log(favToDelete);
+    const id = favToDelete.id;
+    fetch(`${favAPI}`, {
+      method: 'Delete',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     const removeArr = favoritesState.filter(fav => fav !== removedBaker)
     setFavoritesState(removeArr);
-
   };
 
   const filteredBakers = bakersState.filter((baker) => {
