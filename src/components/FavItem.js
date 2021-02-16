@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-function FavItem( { favBakerObj, onRemoved } ){  
+function FavItem( { favBakerObj, onRemoveFromFav } ){  
     const {name, profile_image} = favBakerObj
-    // console.log(favBakerObj)
+    // console.log(favId)
 
     return(
         <div>
             <h3>{name}</h3>
             <img src={profile_image} alt={name} />
             <br></br>
-            <button onClick={onRemoved}>Remove Favorite</button>
+            <button onClick={onRemoveFromFav}>Remove Favorite</button>
         </div>
     )
 }

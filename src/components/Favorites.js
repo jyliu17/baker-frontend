@@ -1,24 +1,44 @@
 import React, { useEffect, useState } from "react";
 import FavItem from "./FavItem";
 
-function Favorites({ setFavSt, favAPI, favoritesState, onRemoved }) {
+function Favorites({ favAPI, setFavoriteBakersState, favoriteBakersState, onRemoveFromFav, currentUser }) {
 
+    const [favIds, setFavIds] = useState([]);
     useEffect(() => {
         fetch(favAPI)
             .then(r => r.json())
             .then(favArray => {
+                setFavIds([...favIds, favArray.map(f => f.id)])
                 getBakersObj(favArray)
             })
     }, []);
+    // console.log(currentUser.favorites)
+    console.log(favIds);
 
     function getBakersObj(favArray) {
-        const bakersArray = favArray.map((fav) => fav.baker);
-        setFavSt(bakersArray);
+        if (currentUser) {
+            const userFavArray = favArray.filter(fav => fav.baker_id === currentUser.id);
+            const bakersArray = userFavArray.map((fav) => fav.baker);
+            setFavoriteBakersState(bakersArray);
+        }
     };
+
+    const favoritesArray = favoriteBakersState.map((favBaker) => {
+        // console.log(favBaker)
+        return <FavItem favBakerObj={favBaker} key='baker'/>
+     
+    })
 
     return (
         <div>
-            {favoritesState.map((favBaker) => <FavItem favBakerObj={favBaker} onRemoved={onRemoved} />)}
+            {/* {favoriteBakersState.map((favBaker) => (
+    
+                <FavItem key='baker'
+                    favBakerObj={favBaker}
+                    onRemoveFromFav={onRemoveFromFav}
+                />
+            ))} */}
+            {favoritesArray}
         </div>
     )
     // key={favBaker.name}
