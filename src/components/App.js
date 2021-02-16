@@ -54,7 +54,7 @@ function App() {
     // let arr = favArr.filter((f) => f.baker.id === addedBaker.id);
     // let favId = arr[0].id;
 
-    let objData = { user_id: parseInt('1'), baker_id: addedBaker.id };
+    let objData = { user_id: parseInt('2'), baker_id: addedBaker.id };
 
     fetch(`${favAPI}`, {
       method: 'POST',
@@ -73,23 +73,22 @@ function App() {
 
 
   function handleRemoveFav(removedBaker) {
+    const removeArr = favoritesState.filter(fav => fav.baker_id !== removedBaker.id)
+    setFavoritesState(removeArr);
     // console.log(newF)
     let user2 = {
       "id": 2,
       "username": "noura",
       "favorites": [{ "id": 3, "user_id": 2, "baker_id": 2 }, { "id": 4, "user_id": 2, "baker_id": 3 }]
     };
-    let favToDelete = user.favorites.filter(fav => fav.baker_id === removedBaker.id);
-    console.log(favToDelete);
-    const id = favToDelete.id;
-    fetch(`${favAPI}`, {
+    //to test
+    let favToDelete = user2.favorites.filter(fav => fav.baker_id === removedBaker.id);
+    // console.log(favToDelete[0]);
+    const id = favToDelete[0].id;
+    fetch(`${favAPI}/${id}`, {
       method: 'Delete',
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
-    const removeArr = favoritesState.filter(fav => fav !== removedBaker)
-    setFavoritesState(removeArr);
+
   };
 
   const filteredBakers = bakersState.filter((baker) => {
@@ -138,7 +137,7 @@ function App() {
             />
           </Route>
           <Route>
-            <Favorites setFavSt={setFavSt} favoritesState={favoritesState} favAPI={favAPI} key='myFav' />
+            <Favorites setFavSt={setFavSt} favoritesState={favoritesState} favAPI={favAPI} key='myFav' onRemoved={handleRemoveFav} />
           </Route>
 
         </Switch>

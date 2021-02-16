@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FavItem from "./FavItem";
 
-function Favorites({ setFavSt, favAPI, favoritesState }) {
+function Favorites({ setFavSt, favAPI, favoritesState, onRemoved }) {
 
     useEffect(() => {
         fetch(favAPI)
@@ -18,7 +18,7 @@ function Favorites({ setFavSt, favAPI, favoritesState }) {
 
     return (
         <div>
-            {favoritesState.map((favBaker) => <FavItem favBakerObj={favBaker} />)}
+            {favoritesState.map((favBaker) => <FavItem favBakerObj={favBaker} onRemoved={onRemoved} />)}
         </div>
     )
     // key={favBaker.name}
