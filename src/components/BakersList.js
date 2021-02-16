@@ -3,11 +3,11 @@ import Baker from "./Baker"
 import Search from "./Search"
 import NewBakerForm from "./NewBakerForm"
 
-function BakersList({ bakersState, bakerSearch, setBakerSearch, handleAddBaker, showForm, handleFormClick }) {
+function BakersList({ bakersState, bakerSearch, setBakerSearch, handleAddBaker, showForm, handleFormClick, onAdded, onRemoved }) {
 
 
   const bakersDisplay = bakersState.map((baker => {
-    return <Baker key={baker.id} baker={baker} />
+    return <Baker key={baker.id} baker={baker} onAdded={onAdded} onRemoved={onRemoved} />
   }))
   return (
     <>   

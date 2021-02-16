@@ -3,12 +3,11 @@ import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import BakersList from "./BakersList";
 import BakerPage from "./BakerPage";
+import Favorites from "./Favorites";
 
 
 function App() {
 
-
- 
   // const [currentUser, setCurrentUser] = useState(null);
 
   // // autologin
@@ -25,37 +24,81 @@ function App() {
 
   // console.log(currentUser);
   const API = "http://localhost:3000/bakers";
+  const favAPI = "http://localhost:3000/favorites"
+
   const [bakersState, setBakersState] = useState([]);
-  const [showForm, setShowForm] = useState(false)
-  const [bakerSearch, setBakerSearch] = useState("")
+  const [showForm, setShowForm] = useState(false);
+  const [bakerSearch, setBakerSearch] = useState("");
+  const [favoritesState, setFavoritesState] = useState([]);
+  const [favArr, setFavArr] = useState({});
+
 
   useEffect(() => {
     fetch(API)
-    .then(r => r.json())
-    .then(bakersArray => (setBakersState(bakersArray)))
+      .then(r => r.json())
+      .then(bakersArray => {
+        setBakersState(bakersArray);
+        setFavArr(bakersArray.map(b => b.favorites))
+      })
   }, []);
+
+
+  function setFavSt(bakersIds) {
+    setFavoritesState(bakersIds);
+  };
+
   
-  // console.log(bakersState);
+  function handleAddFav(addedBaker) {
+    // favIndex = addedBaker.id 
+    // console.log(favArr[addedBaker.(Math(addedBaker.id - 1))]);
+    // let arr = favArr.filter((f) => f.baker.id === addedBaker.id);
+    // let favId = arr[0].id;
+
+    let objData = {user_id: parseInt('1'), baker_id: addedBaker.id};
+
+    fetch(`${favAPI}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(objData),
+    })
+    .then(r => r.json())
+    .then(obj => console.log(obj))
+
+    const newFavs = [...favoritesState, addedBaker];
+    // console.log(newF)
+    setFavoritesState(newFavs);
+  };
+
+   
+  function handleRemoveFav(removedBaker) {
+    // console.log(newF)
+    const removeArr = favoritesState.filter(fav => fav !== removedBaker)
+    setFavoritesState(removeArr);
+
+  };
 
   const filteredBakers = bakersState.filter((baker) => {
     return baker.name.toLowerCase().includes(bakerSearch.toLowerCase())
-  })
+  });
+  // console.log(favoritesState);
 
-  function handleAddBaker(newBaker){
+  function handleAddBaker(newBaker) {
     const newBakerList = ([...bakersState, newBaker])
     setBakersState(newBakerList)
   }
 
-  function handleFormClick(){
+  function handleFormClick() {
     setShowForm(showForm => !showForm)
   }
 
-  function handleUpdateBaker(updatedBaker){
+  function handleUpdateBaker(updatedBaker) {
     const updatedBakerList = bakersState.map((baker) => {
       if (baker.id === updatedBaker.id) {
         return updatedBaker;
       } else {
-        return bakersState; 
+        return bakersState;
       }
     });
     setBakersState(updatedBakerList);
@@ -66,20 +109,25 @@ function App() {
       <NavBar />
       <main>
         <Switch>
-           <Route path="/bakers/:id">
-              <BakerPage handleUpdateBaker={handleUpdateBaker}/>
+          <Route path="/bakers/:id">
+            <BakerPage handleUpdateBaker={handleUpdateBaker} />
           </Route>
           <Route path="/bakers">
-            <BakersList bakersState={filteredBakers} 
-                        bakerSearch={bakerSearch} 
-                        setBakerSearch={setBakerSearch} 
-                        handleAddBaker={handleAddBaker}
-                        handleFormClick={handleFormClick}
-                        setShowForm={setShowForm}
-                        showForm={showForm}
-                        />
+            <BakersList bakersState={filteredBakers}
+              bakerSearch={bakerSearch}
+              setBakerSearch={setBakerSearch}
+              handleAddBaker={handleAddBaker}
+              handleFormClick={handleFormClick}
+              setShowForm={setShowForm}
+              showForm={showForm}
+              onAdded={handleAddFav}
+              onRemoved={handleRemoveFav}
+            />
           </Route>
-         
+          <Route>
+            <Favorites setFavSt={setFavSt} favoritesState={favoritesState} favAPI={favAPI} key='myFav' />
+          </Route>
+
         </Switch>
       </main>
     </>

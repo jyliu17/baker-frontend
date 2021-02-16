@@ -12,7 +12,7 @@ function BakerPage({handleUpdateBaker}) {
 
  
   
-  console.log(id);
+  // console.log(id);
 
   useEffect(() => {
     fetch(`http://localhost:3000/bakers/${id}`)
@@ -23,14 +23,12 @@ function BakerPage({handleUpdateBaker}) {
       ); 
   }, [id]);
 
-  console.log(pastries);
+  // console.log(pastries);
 
   function handleFormClick(){
     setShowForm(showForm => !showForm)
   }
  
-
-
 
 // console.log(bakerObj.pastries);
 
