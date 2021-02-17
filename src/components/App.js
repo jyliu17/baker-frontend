@@ -11,9 +11,11 @@ import Signup from "./Signup";
 function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  console.log(currentUser);
+  const [bakersState, setBakersState] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [bakerSearch, setBakerSearch] = useState("");
+  const [favoriteBakersState, setFavoriteBakersState] = useState([]);
+  const [favs, setFavs] = useState([]);
 
   // // autologin
   useEffect(() => {
@@ -25,16 +27,7 @@ function App() {
       });
   }, []);
 
-  // console.log(currentUser);
   const API = "http://localhost:3000/bakers";
-  const favAPI = "http://localhost:3000/favorites"
-
-  const [bakersState, setBakersState] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [bakerSearch, setBakerSearch] = useState("");
-  const [favoriteBakersState, setFavoriteBakersState] = useState([]);
-
-
   useEffect(() => {
     fetch(API)
       .then(r => r.json())
@@ -43,21 +36,37 @@ function App() {
       })
   }, []);
 
+  useEffect(() => {
+    if (currentUser) {
+    fetch(`${API}/${currentUser.id}`)
+        .then(r => r.json())
+        .then(userObj=> {
+            setFavs(userObj.favorites)
+        })
+    }
+}, []);
+console.log(favs);
 
-  // function setFavSt(bakersIds) {
-  //   setFavoriteBakersState(bakersIds);
-  // };
+// function getUserFavs(favArray) {
+//   const userFavArray = favArray.filter(fav => fav.user_id === currentUser.id);
+//   // const bakersArray = userFavArray.map((fav) => fav.baker);
+//   setFavs(userFavArray);
+// };
+
 
 
   function handleAddFav(addedBaker) {
-    // favIndex = addedBaker.id 
-    // console.log(favArr[addedBaker.(Math(addedBaker.id - 1))]);
-    // let arr = favArr.filter((f) => f.baker.id === addedBaker.id);
-    // let favId = arr[0].id;
-
+    // console.log(addedBaker);
+    let bakerId = addedBaker.id;
+    let userId = currentUser.id;
+    console.log(userId);
+    console.log(bakerId);
     let objData = { user_id: currentUser.id, baker_id: addedBaker.id };
-    if (favoriteBakersState.includes(addedBaker)) {
-      fetch(`${favAPI}`, {
+    console.log(objData)
+    if (favoriteBakersState.find(b => b.id === addedBaker.id) !== void 0) {
+      alert('The selected baker already exists in your favorite!');
+    } else {
+      fetch(`http://localhost:3000/favorites`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,45 +87,25 @@ function App() {
 
   function handleRemoveFav(removedBaker) {
     //**optimistic rendering**
-    const removeArr = favoriteBakersState.filter(fav => fav.baker_id !== removedBaker.id)
-    setFavoriteBakersState(removeArr);
-    // console.log(newF)
-    // let user2 = {
-    //   "id": 2,
-    //   "username": "noura",
-    //   "favorites": [{ "id": 3, "user_id": 2, "baker_id": 2 }, { "id": 4, "user_id": 2, "baker_id": 3 }]
-    // };
 
-    //to test
     let favToDelete = currentUser.favorites.filter(fav => fav.baker_id === removedBaker.id);
     // console.log(favToDelete[0]);
     const id = favToDelete[0].id;
     // console.log(id);
-    fetch(`${favAPI}/${id}`, {
+    fetch(`http://localhost:3000/favorites/${id}`, {
       method: 'Delete',
     });
 
   };
 
-  function onRemoveFromFav(favBaker) {
-    // const removeArr = favoriteBakersState.filter(fav => fav.baker_id !== favBaker.id)
-    // setFavoriteBakersState(removeArr);
-
-    // let favorite = currentUser.favorites.filter(fav => fav.id === favBaker.id);
-  console.log(favBaker);
-   
-    // console.log(favId);
-    // const id = fav[0].id;
-    // console.log(id);
-    // fetch(`${favAPI}/${id}`, {
-    //   method: 'Delete',
-    // });
-  }
+  function onRemoveFromFav(favorite) {
+    const removeArr = favoriteBakersState.filter(fav => fav.baker_id !== favorite.id)
+    setFavoriteBakersState(removeArr);
+  };
 
   const filteredBakers = bakersState.filter((baker) => {
     return baker.name.toLowerCase().includes(bakerSearch.toLowerCase())
   });
-  // console.log(favoriteBakersState);
 
   function handleAddBaker(newBaker) {
     const newBakerList = ([...bakersState, newBaker])
@@ -161,15 +150,20 @@ function App() {
               setShowForm={setShowForm}
               showForm={showForm}
               onAdded={handleAddFav}
-              onRemoved={handleRemoveFav} />
+              onRemoved={handleRemoveFav}
+              currentUser={currentUser}
+              favoriteBakersState={favoriteBakersState} 
+              favs={favs}
+              setFavs={setFavs} />
           </Route>
           <Route path="/favorites">
-            <Favorites key='myFav'
+            <Favorites
+              key='myFav'
               favoriteBakersState={favoriteBakersState}
               setFavoriteBakersState={setFavoriteBakersState}
-              favAPI={favAPI}
               onRemoveFromFav={onRemoveFromFav}
-              currentUser={currentUser} />
+              currentUser={currentUser}
+              favs={favs} />
           </Route>
         </Switch>
       </main>

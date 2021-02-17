@@ -1,44 +1,36 @@
 import React, { useEffect, useState } from "react";
 import FavItem from "./FavItem";
 
-function Favorites({ favAPI, setFavoriteBakersState, favoriteBakersState, onRemoveFromFav, currentUser }) {
+function Favorites({ setFavoriteBakersState, favoriteBakersState, onRemoveFromFav, currentUser, favs }) {
 
-    const [favIds, setFavIds] = useState([]);
-    useEffect(() => {
-        fetch(favAPI)
-            .then(r => r.json())
-            .then(favArray => {
-                setFavIds([...favIds, favArray.map(f => f.id)])
-                getBakersObj(favArray)
-            })
-    }, []);
-    // console.log(currentUser.favorites)
-    console.log(favIds);
+    // useEffect(() => {
+    //     if (currentUser) {
+    //     fetch("http://localhost:3000/favorites")
+    //         .then(r => r.json())
+    //         .then(favArray => {
+    //             getBakersObj(favArray)
+    //         })
+    //     }
+    // }, []);
 
-    function getBakersObj(favArray) {
-        if (currentUser) {
-            const userFavArray = favArray.filter(fav => fav.baker_id === currentUser.id);
-            const bakersArray = userFavArray.map((fav) => fav.baker);
-            setFavoriteBakersState(bakersArray);
-        }
-    };
-
-    const favoritesArray = favoriteBakersState.map((favBaker) => {
-        // console.log(favBaker)
-        return <FavItem favBakerObj={favBaker} key='baker'/>
-     
-    })
+    // function getBakersObj(favArray) {
+    //     const userFavArray = favArray.filter(fav => fav.user_id === currentUser.id);
+    //     const bakersArray = userFavArray.map((fav) => fav.baker);
+    //     setFavoriteBakersState(bakersArray);
+    // };
+    const bakersArray = favs.map((fav) => fav.baker);
+    console.log(favs)
+    // setFavoriteBakersState(bakersArray);
 
     return (
         <div>
-            {/* {favoriteBakersState.map((favBaker) => (
+            {favoriteBakersState.map((favBaker) => (
     
                 <FavItem key='baker'
                     favBakerObj={favBaker}
                     onRemoveFromFav={onRemoveFromFav}
                 />
-            ))} */}
-            {favoritesArray}
+            ))}
         </div>
     )
     // key={favBaker.name}

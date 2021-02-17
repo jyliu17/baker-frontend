@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 
-function Baker({ baker, onAdded, onRemoved }) {
+function Baker({ baker, onAdded, onRemoved, currentUser, fav, updateFavs }) {
     const { id, name, location, contact, profile_image, expertise} = baker;
-
-    const [fav, setFav] = useState(false);
     
     function onAddFavClick(){
-        fav ? onRemoved(baker) : onAdded(baker);
-        setFav(!fav);
+    
+        if(fav){
+            onRemoved(baker)
+        }else{
+            onAdded(baker) 
+        }
+        //setFav(!fav);
+        //updateFavs(baker, !fav);
     }
 
     return (
@@ -23,7 +27,10 @@ function Baker({ baker, onAdded, onRemoved }) {
             <p> Location: {location}</p>
             <a> Contact: {contact}</a>  
             <br></br>
+            {currentUser ? 
             <button onClick={onAddFavClick}>{fav ? "Remove Favorite" : "Add to My Favorites"}</button>
+            : null  
+            }
         </div>
     )
 }
