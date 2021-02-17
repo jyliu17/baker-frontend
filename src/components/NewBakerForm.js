@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function NewBakerForm({handleAddBaker}){
+function NewBakerForm({ handleAddBaker, setShowForm }){
 
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
@@ -27,6 +27,7 @@ function NewBakerForm({handleAddBaker}){
       .then(response => response.json())
       .then(newBakerData => {
         handleAddBaker(newBakerData);
+        setShowForm(false);
       })
     }
 

@@ -18,14 +18,14 @@ function App() {
   const [isFav, setIsFav] = useState(false);
 
   // // autologin
-  useEffect(() => {
-    //   // TODO: check if there'a token for the logged in user
-    fetch("http://localhost:3000/self")
-      .then((r) => r.json())
-      .then((user) => {
-        setCurrentUser(user);
-      });
-  }, []);
+  // useEffect(() => {
+  //   //   // TODO: check if there'a token for the logged in user
+  //   fetch("http://localhost:3000/self")
+  //     .then((r) => r.json())
+  //     .then((user) => {
+  //       setCurrentUser(user);
+  //     });
+  // }, []);
 
   const API = "http://localhost:3000/bakers";
   useEffect(() => {
@@ -138,7 +138,7 @@ function App() {
             <Signup currentUser={currentUser} setCurrentUser={setCurrentUser} />
           </Route>
           <Route path="/bakers/:id">
-            <BakerPage handleUpdateBaker={handleUpdateBaker} />
+            <BakerPage handleUpdateBaker={handleUpdateBaker} currentUser={currentUser} />
           </Route>
           <Route path="/bakers">
             <BakersList bakersState={filteredBakers}
@@ -151,7 +151,7 @@ function App() {
               onAdded={handleAddFav}
               onRemoved={handleRemoveFav}
               currentUser={currentUser}
-              favs={favs} 
+              favs={favs}
             />
           </Route>
           <Route path="/favorites">

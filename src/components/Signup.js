@@ -10,8 +10,6 @@ function SignUp({ setCurrentUser }) {
 
   const history = useHistory();
 
-  console.log(errors);
-
   function handleChange(e) {
     setFormData({
       ...formData,
@@ -35,12 +33,8 @@ function SignUp({ setCurrentUser }) {
       
           setErrors(data.errors);
         } else {
-          const { user, token } = data;
-
-          localStorage.setItem("token", token);
-
-          setCurrentUser(user);
-          history.push("/profile");
+          setCurrentUser(data);
+          history.push("/bakers");
         }
       });
   }

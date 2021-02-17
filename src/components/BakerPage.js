@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UpdateBakerForm from "./UpdateBakerForm"
 
-function BakerPage({handleUpdateBaker}) {
+function BakerPage({handleUpdateBaker, currentUser}) {
 
   const {id} = useParams();
 
@@ -48,11 +48,13 @@ const { name, location, contact, profile_image, expertise } = bakerObj;
         <p> Location: {location}</p>
         <a> Contact: {contact}</a>
         <div>
-        <div>
+        {currentUser ?
+        <div> 
         {showForm ? <button onClick={handleFormClick}>Hide Form</button> : 
                     <button onClick={handleFormClick}>Update Info</button> }
-        {showForm ? <UpdateBakerForm handleCurrentBaker={handleCurrentBaker} bakerObj={bakerObj} /> : null }
-        </div>
+        {showForm ? <UpdateBakerForm setShowForm={setShowForm} handleCurrentBaker={handleCurrentBaker} bakerObj={bakerObj} /> : null }
+        </div> : null }
+  
           {pastries.map((p) => (
             <div key={p.id}>
               <h3>{p.name}</h3>

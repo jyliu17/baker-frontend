@@ -1,11 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 function NavBar({ currentUser, setCurrentUser}) {
-
+  const history = useHistory();
   function logout() {
-
     setCurrentUser(null);
+    history.push('/login');
   }
   
   return (

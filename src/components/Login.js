@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useHistory } from "react-router-dom";
 
 function Login( {currentUser, setCurrentUser} ) {
 
@@ -8,6 +8,7 @@ function Login( {currentUser, setCurrentUser} ) {
         password: "",
       });
     const [errors, setErrors] = useState([]);
+    const history = useHistory();
 
     function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,7 +30,9 @@ function Login( {currentUser, setCurrentUser} ) {
           setErrors(userObj.errors)
         }else{
           setCurrentUser(userObj)
+          history.push(`/bakers`);
         }
+      
       })
 
     }
