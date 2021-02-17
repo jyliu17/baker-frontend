@@ -2,31 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 
-function Baker({ baker, onAdded, onRemoved, currentUser, favs, isFav, setIsFav }) {
+function Baker({ baker, onAdded, onRemoved, currentUser, favs }) {
     const { id, name, location, contact, profile_image, expertise } = baker;
     
-    console.log(favs);
+    // console.log(favs);
 
-    function isFavorite() {
-        if (favs.length < 1) {
-            return false
-        } else if (favs.length > 1) {
-            favs.forEach(f => {
-                if (f.baker_id === baker.id) {
-                    return true
-                } else {
-                    return false
-                }
-            })
-        }
-    };
-
-    function onAddFavClick() {
-        if (isFavorite === true) {
+    function handleClick(e){
+        if (e.target.innerText === "Remove Favorite"){
             onRemoved(baker)
         } else {
             onAdded(baker)
-        }
+        }  
     }
 
     return (
@@ -41,7 +27,7 @@ function Baker({ baker, onAdded, onRemoved, currentUser, favs, isFav, setIsFav }
             <a> Contact: {contact}</a>
             <br></br>
             {currentUser ?
-                <button onClick={onAddFavClick}>{isFav ? "Remove Favorite" : "Add to My Favorites"}</button>
+                <button onClick={handleClick}>{favs.find(f=>f.baker.id === id) ? "Remove Favorite" : "Add to My Favorites"}</button>
                 : null
             }
         </div>

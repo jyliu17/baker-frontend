@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FavItem from "./FavItem";
 
-function Favorites({ favoriteBakersState, onRemoveFromFav, currentUser, favs, setFavs }) {
+function Favorites({ onRemoveFromFav, currentUser, favs, setFavs, }) {
 
     useEffect(() => {
         if (currentUser) {

@@ -14,7 +14,6 @@ function App() {
   const [bakersState, setBakersState] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [bakerSearch, setBakerSearch] = useState("");
-  const [favoriteBakersState, setFavoriteBakersState] = useState([]);
   const [favs, setFavs] = useState([]);
   const [isFav, setIsFav] = useState(false);
 
@@ -64,8 +63,8 @@ function App() {
     // console.log(addedBaker);
     let bakerId = addedBaker.id;
     let userId = currentUser.id;
-    let objData = { user_id: bakerId, baker_id: bakerId };
-    if (favoriteBakersState.find(b => b.id === addedBaker.id)) {
+    let objData = { user_id: userId, baker_id: bakerId };
+    if (favs.find(f => f.baker.id === addedBaker.id)) {
       alert('The selected baker already exists in your favorite!');
     } else {
       fetch(`http://localhost:3000/favorites`, {
@@ -76,30 +75,27 @@ function App() {
         body: JSON.stringify(objData),
       })
         .then(r => r.json())
-        .then(objData => renderFav(objData))
+        .then(favData => renderFav(favData))
     }
   };
 
-  function renderFav(objData) {
-    const newFavs = [...favoriteBakersState, objData];
+  function renderFav(obj) {
+    const newFavs = [...favs, obj];
     // console.log(newF)
-    setFavoriteBakersState(newFavs);
-    setIsFav(true);
+    setFavs(newFavs);
   }
 
   function handleRemoveFav(removedBaker) {
-    const removeArr = favoriteBakersState.filter(f => f.baker_id !== removedBaker.id)
-    setFavoriteBakersState(removeArr);
-    if (currentUser.favorites.length > 0) {
-      let favToDelete = currentUser.favorites.filter(fav => fav.baker_id === removedBaker.id);
-      // console.log(favToDelete[0]);
-      const id = favToDelete[0].id;
+    if (favs.length > 0) {
+      let favToDelete = favs.find(f => f.baker_id === removedBaker.id);
+      const id = favToDelete.id;
       // console.log(id);
       fetch(`http://localhost:3000/favorites/${id}`, {
         method: 'Delete',
       });
-      setIsFav(false);
-    }
+    };
+    const removeArr = favs.filter(f => f.baker.id !== removedBaker.id)
+    setFavs(removeArr);
   };
 
   function onRemoveFromFav(id) {
@@ -123,6 +119,9 @@ function App() {
 
   function handleFormClick() {
     setShowForm(showForm => !showForm)
+  }
+  function handleFavClick() {
+    setIsFav(isFav => !isFav)
   }
 
   function handleUpdateBaker(updatedBaker) {
@@ -161,17 +160,17 @@ function App() {
               onAdded={handleAddFav}
               onRemoved={handleRemoveFav}
               currentUser={currentUser}
-              favoriteBakersState={favoriteBakersState}
-              favs={favs} />
+              favs={favs} 
+            />
           </Route>
           <Route path="/favorites">
             <Favorites
               key='myFav'
-              favoriteBakersState={favoriteBakersState}
               onRemoveFromFav={onRemoveFromFav}
               currentUser={currentUser}
               favs={favs}
-              setFavs={setFavs} />
+              setFavs={setFavs}
+              />
           </Route>
         </Switch>
       </main>

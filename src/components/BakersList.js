@@ -19,7 +19,6 @@ function BakersList({ bakersState, bakerSearch, setBakerSearch, handleAddBaker, 
     {showForm ? <NewBakerForm handleAddBaker={handleAddBaker}/> : null }
     </div>
       <h1>Our Talented Bakers</h1>
-   
       {bakersDisplay}
     </>
   )
