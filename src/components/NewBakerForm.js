@@ -38,17 +38,7 @@ return(
         name="name"
         placeholder="Baker name"
         value={name}
-        onChange={e => setName(e.target.value)} />
-      <input type="text"
-        name="location"
-        placeholder="Baker location"
-        value={location}
-        onChange={e => setLocation(e.target.value)} />
-      <input type="text"
-        name="contact"
-        placeholder="Baker Contact"
-        value={contact}
-        onChange={e => setContact(e.target.value)} />
+        onChange={e => setName(e.target.value)} /> 
         <input type="text"
         name="profile image"
         placeholder="Baker Image"
@@ -59,6 +49,17 @@ return(
         placeholder="Baker Expertise"
         value={expertise}
         onChange={e => setExpertise(e.target.value)} />
+      <input type="text"
+        name="location"
+        placeholder="Baker location"
+        value={location}
+        onChange={e => setLocation(e.target.value)} />
+      <input type="text"
+        name="contact"
+        placeholder="Baker Contact"
+        value={contact}
+        onChange={e => setContact(e.target.value)} />
+      
         
       <button type="submit">Add Baker</button>
     </form>

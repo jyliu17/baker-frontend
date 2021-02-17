@@ -24,6 +24,11 @@ function BakerPage({handleUpdateBaker}) {
   }, [id]);
 
   // console.log(pastries);
+  function handleCurrentBaker(newBaker){
+    setBakerObj(newBaker)
+    handleUpdateBaker(newBaker)
+
+  }
 
   function handleFormClick(){
     setShowForm(showForm => !showForm)
@@ -46,7 +51,7 @@ const { name, location, contact, profile_image, expertise } = bakerObj;
         <div>
         {showForm ? <button onClick={handleFormClick}>Hide Form</button> : 
                     <button onClick={handleFormClick}>Update Info</button> }
-        {showForm ? <UpdateBakerForm handleUpdateBaker={handleUpdateBaker}/> : null }
+        {showForm ? <UpdateBakerForm handleCurrentBaker={handleCurrentBaker} /> : null }
         </div>
           {pastries.map((p) => (
             <div key={p.id}>

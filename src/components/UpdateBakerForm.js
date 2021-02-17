@@ -1,7 +1,7 @@
 import React, {  useState } from "react";
 import { useParams } from "react-router-dom";
 
-function UpdateBakerForm({handleUpdateBaker}) {
+function UpdateBakerForm({handleCurrentBaker}) {
 
 
     const {id} = useParams();
@@ -30,7 +30,7 @@ function UpdateBakerForm({handleUpdateBaker}) {
           })
             .then(response => response.json())
             .then(updateData => {
-            handleUpdateBaker(updateData);
+            handleCurrentBaker(updateData);
             })
     }
 
@@ -39,17 +39,7 @@ return (
 <div className="new-baker-form">
     <h2> Update Information</h2>
     <form onSubmit={handleSubmit}>
-      <input type="text"
-        name="location"
-        placeholder="Baker location"
-        value={updateLocation}
-        onChange={e => setUpdateLocation(e.target.value)} />
-      <input type="text"
-        name="contact"
-        placeholder="Baker Contact"
-        value={updateContact}
-        onChange={e => setUpdateContact(e.target.value)} />
-        <input type="text"
+       <input type="text"
         name="profile image"
         placeholder="Baker Image"
         value={updateImage}
@@ -59,6 +49,17 @@ return (
         placeholder="Baker Expertise"
         value={updateExpertise}
         onChange={e => setUpdateExpertise(e.target.value)} />
+        <input type="text"
+        name="location"
+        placeholder="Baker location"
+        value={updateLocation}
+        onChange={e => setUpdateLocation(e.target.value)} />
+      <input type="text"
+        name="contact"
+        placeholder="Baker Contact"
+        value={updateContact}
+        onChange={e => setUpdateContact(e.target.value)} />
+       
         
       <button type="submit">Update Baker</button>
     </form>

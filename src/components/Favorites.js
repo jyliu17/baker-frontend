@@ -3,16 +3,7 @@ import FavItem from "./FavItem";
 
 function Favorites({ onRemoveFromFav, currentUser, favs, setFavs, }) {
 
-    useEffect(() => {
-        if (currentUser) {
-        fetch(`http://localhost:3000/users/${currentUser.id}`)
-            .then(r => r.json())
-            .then(userObj=> {
-                setFavs(userObj.favorites)
-                // getBakers(userObj.favorites)
-            })
-        }
-    }, []);
+
 
     console.log(favs);
 

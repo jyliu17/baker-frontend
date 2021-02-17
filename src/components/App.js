@@ -36,28 +36,18 @@ function App() {
       })
   }, []);
 
-  //   useEffect(() => {
-  //     if (currentUser) {
-  //     fetch(`${API}/${currentUser.id}`)
-  //         .then(r => r.json())
-  //         .then(userObj=> {
-  //             setFavs(userObj.favorites)
-  //         })
-  //     }
-  // }, []);
-  // console.log(favs);
 
-  // function getUserFavs(favArray) {
-  //   const userFavArray = favArray.filter(fav => fav.user_id === currentUser.id);
-  //   // const bakersArray = userFavArray.map((fav) => fav.baker);
-  //   setFavs(userFavArray);
-  // };
 
-  // function getBakers(favArray) {
-  //   const favBakersArr = favArray.map((f) => f.baker);
-  //   setFavoriteBakersState(favBakersArr);
-  // };
-  // console.log(favoriteBakersState);
+  useEffect(() => {
+    if (currentUser) {
+    fetch(`http://localhost:3000/users/${currentUser.id}`)
+        .then(r => r.json())
+        .then(userObj=> {
+            setFavs(userObj.favorites)
+            // getBakers(userObj.favorites)
+        })
+    }
+}, [currentUser]);
 
   function handleAddFav(addedBaker) {
     // console.log(addedBaker);
@@ -129,11 +119,12 @@ function App() {
       if (baker.id === updatedBaker.id) {
         return updatedBaker;
       } else {
-        return bakersState;
+        return baker;
       }
     });
+    console.log(updatedBakerList)
     setBakersState(updatedBakerList);
-  }
+  } 
 
   return (
     <>
