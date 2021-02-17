@@ -1,15 +1,15 @@
 import React, {  useState } from "react";
 import { useParams } from "react-router-dom";
 
-function UpdateBakerForm({handleCurrentBaker}) {
+function UpdateBakerForm({handleCurrentBaker, bakerObj}) {
 
 
     const {id} = useParams();
     // const [updateName, setUpdateName] = useState("");
-    const [updateLocation, setUpdateLocation] = useState("");
-    const [updateContact, setUpdateContact] = useState("");
-    const [updateImage, setUpdateImage] = useState("");
-    const [updateExpertise, setUpdateExpertise] = useState("");
+    const [updateLocation, setUpdateLocation] = useState(bakerObj.location);
+    const [updateContact, setUpdateContact] = useState(bakerObj.contact);
+    const [updateImage, setUpdateImage] = useState(bakerObj.profile_image);
+    const [updateExpertise, setUpdateExpertise] = useState(bakerObj.expertise);
     
     
     const updateBaker = { 

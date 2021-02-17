@@ -51,7 +51,7 @@ const { name, location, contact, profile_image, expertise } = bakerObj;
         <div>
         {showForm ? <button onClick={handleFormClick}>Hide Form</button> : 
                     <button onClick={handleFormClick}>Update Info</button> }
-        {showForm ? <UpdateBakerForm handleCurrentBaker={handleCurrentBaker} /> : null }
+        {showForm ? <UpdateBakerForm handleCurrentBaker={handleCurrentBaker} bakerObj={bakerObj} /> : null }
         </div>
           {pastries.map((p) => (
             <div key={p.id}>
