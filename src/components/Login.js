@@ -24,7 +24,13 @@ function Login( {currentUser, setCurrentUser} ) {
       body: JSON.stringify(formData),
     })
       .then((r) => r.json())
-      .then(userObj => setCurrentUser(userObj))
+      .then(userObj => {
+        if(userObj.errors){
+          setErrors(userObj.errors)
+        }else{
+          setCurrentUser(userObj)
+        }
+      })
 
     }
 
