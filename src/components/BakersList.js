@@ -3,20 +3,10 @@ import Baker from "./Baker"
 import Search from "./Search"
 import NewBakerForm from "./NewBakerForm"
 
-function BakersList({ bakersState, bakerSearch, setBakerSearch, handleAddBaker, showForm, handleFormClick, onAdded, onRemoved, currentUser, favs, updateFavs }) {
-  
-  // updateFavs(baker, updatedValue) {
-  //   for (let i = 0; i < favs.length; i++) {
-  //     if (favs[i].baker_id === baker.id) {
-  //       favs[i].
-  //     }
-  //   }
-  //   setFavs([]);
-  // }
+function BakersList({ bakersState, bakerSearch, setBakerSearch, handleAddBaker, showForm, handleFormClick, onAdded, onRemoved, currentUser, favs }) {
 
   const bakersDisplay = bakersState.map((baker) => {
-    let isFavoriteBaker = favs.find(f => f.baker_id === baker.id);
-    return <Baker key={baker.id} baker={baker} onAdded={onAdded} onRemoved={onRemoved} currentUser={currentUser} fav={isFavoriteBaker} />
+    return <Baker key={baker.id} baker={baker} onAdded={onAdded} onRemoved={onRemoved} currentUser={currentUser} favs={favs} />
   })
 
   return (

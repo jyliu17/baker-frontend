@@ -7,7 +7,7 @@ function NavBar({ currentUser, setCurrentUser}) {
 
     setCurrentUser(null);
   }
-
+  
   return (
     <header>
       <div>
