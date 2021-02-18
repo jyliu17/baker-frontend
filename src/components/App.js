@@ -6,6 +6,7 @@ import BakerPage from "./BakerPage";
 import Favorites from "./Favorites";
 import Login from "./Login";
 import Signup from "./Signup";
+import styled from "styled-components"
 
 
 function App() {
@@ -170,3 +171,12 @@ function App() {
 }
 
 export default App;
+
+const Wrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+`
+const Title = styled.h1`
+  color: skyblue
+`

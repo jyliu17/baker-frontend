@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components"
 
 
 function Baker({ baker, onAdded, onRemoved, currentUser, favs }) {
@@ -16,9 +17,9 @@ function Baker({ baker, onAdded, onRemoved, currentUser, favs }) {
     }
 
     return (
-        <div>
+        <Card>
             <h3>{name}</h3>
-            <img src={profile_image} alt={name} />
+            <BakerImage src={profile_image} alt={name} />
             <br></br>
             <Link to={`/bakers/${id}`}>View Sample Pastries </Link>
             <br></br>
@@ -30,9 +31,30 @@ function Baker({ baker, onAdded, onRemoved, currentUser, favs }) {
                 <button onClick={handleClick}>{favs.find(f=>f.baker.id === id) ? "Remove Favorite" : "Add to My Favorites"}</button>
                 : null
             }
-        </div>
+        </Card>
     )
 }
 
 
 export default Baker
+
+const Card = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 200px;
+  height: 100px
+  margin: 10px
+  padding: 5px;
+  border: none;
+  :hover {
+      transform: scale(1.04);
+      box-shadow: 2px 5px white;
+  }
+`
+
+const BakerImage = styled.img`
+height: 150px
+width: 100px;
+object-fit: contain;
+
+`

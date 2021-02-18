@@ -24,13 +24,14 @@ header a,
 header button {
   font-size: 1rem;
   display: inline-block;
-  background-color: #fff8e7;
-  border: 1px solid salmon;
+  background-color: #000100;
+  border: 1px solid lightblue;
   margin: 1rem;
   padding: 1rem;
   text-decoration: none;
-  color: salmon;
+  color: lightblue;
   cursor: pointer;
+
 }
 
 main {
@@ -45,6 +46,7 @@ form {
   width: 400px;
   margin: 0 auto;
   padding: 0 1rem 1rem;
+  
 }
 
 form input {
