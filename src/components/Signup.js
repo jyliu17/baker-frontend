@@ -64,7 +64,7 @@ function SignUp({ setCurrentUser }) {
       {errors.map((error) => {
         return <p key={error}>{error}</p>;
       })}
-      <input type="submit" value="Signup" />
+      <button type="submit" value="Signup">Signup</button>
     </form>
   );
 }

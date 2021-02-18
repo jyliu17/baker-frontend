@@ -17,6 +17,7 @@ function Baker({ baker, onAdded, onRemoved, currentUser, favs }) {
 
     return (
         <div>
+            <br></br>
             <h3>{name}</h3>
             <img src={profile_image} alt={name} />
             <br></br>

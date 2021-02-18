@@ -3,12 +3,21 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  max-width: 900px;
   display: flex;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.searchbar {
+  margin-left: 500px;
+  position: relative;
+  background-color: #fceefc;
+  border: none;
+  display: inline block;
+  flex-direction: column;
+  width: 300px;
+  padding: 20px;
 }
 
 .logo {
@@ -18,13 +27,13 @@ code {
   height: 70px;
   /* background-position: 50% 50%; */
   /* background-repeat: no-repeat; */
-  margin-left: 33px;
+  margin-left: 55px;
   margin-top: 10px;
   margin-bottom: 40px;
 }
 .logout {
   margin-top: 350px;
-  margin-left: 30px;
+  margin-left: 46px;
   background-color: #df69c6;
 }
 .welcome {
@@ -72,13 +81,15 @@ button {
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
+  margin-top: 0px;
+  margin-left: auto;
 }
 
 header {
   display: flex;
   /* align-items: center; */
   height: 100%;
-  width: 160px;
+  width: 190px;
   position: fixed;
   float: left;
   top: 0;
@@ -105,11 +116,21 @@ button:hover {
 }
 
 main {
-  margin-left: 160px;
+  margin-left: 320px;
   position: absolute;
 }
 
 form {
+  background-color: #fceefc;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  margin: 50%
+}
+.add-baker-form {
   background-color: #fceefc;
   border: none;
   display: flex;
@@ -130,3 +151,27 @@ form input[type="submit"] {
 form img {
   width: 100px;
 }
+
+/* .grid { 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  align-items: start;
+  }
+.grid > article {
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+}
+.grid > article img {
+  max-width: 100%;
+}
+.text {
+  padding: 0 20px 20px;
+}
+.text > button {
+  background: gray;
+  border: 0;
+  color: white;
+  padding: 10px;
+  width: 60%;
+  } */

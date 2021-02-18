@@ -33,8 +33,7 @@ function NewBakerForm({ handleAddBaker, setShowForm }){
 
 return(
     <div className="new-baker-form">
-    <h2> Add New Baker</h2>
-    <form onSubmit={handleSubmit}>
+    <form className='add-baker-form' onSubmit={handleSubmit}>
       <input type="text"
         name="name"
         placeholder="Baker name"
