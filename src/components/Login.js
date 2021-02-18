@@ -40,7 +40,7 @@ function Login( {currentUser, setCurrentUser} ) {
     return (
         <div>
           <form onSubmit={handleSubmit} autoComplete="off">
-            <h1>Login</h1>
+            <h3>Login</h3>
             <label>Username</label>
             <input
               type="text"
@@ -58,7 +58,7 @@ function Login( {currentUser, setCurrentUser} ) {
             {errors.map((error) => {
               return <p key={error}>{error}</p>;
             })}
-            <input type="submit" value="Login" />
+            <button classname="login" type="submit" value="Login" >Login</button>
           </form>
         </div>
       );

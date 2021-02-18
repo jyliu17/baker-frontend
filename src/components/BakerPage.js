@@ -46,7 +46,7 @@ const { name, location, contact, profile_image, expertise } = bakerObj;
         <img src={profile_image} alt={name} />
         <p> Expertise: {expertise}</p>
         <p> Location: {location}</p>
-        <a> Contact: {contact}</a>
+        <p> Contact: {contact}</p>
         <div>
         {currentUser ?
         <div> 
@@ -57,9 +57,9 @@ const { name, location, contact, profile_image, expertise } = bakerObj;
   
           {pastries.map((p) => (
             <div key={p.id}>
-              <h3>{p.name}</h3>
+              <h4>{p.name}</h4>
               <img src={p.image} alt={p.name} />
-              <p>{p.description}</p>
+              <h5>{p.description}</h5>
             </div>
           ))}
         </div>

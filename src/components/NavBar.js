@@ -11,12 +11,13 @@ function NavBar({ currentUser, setCurrentUser}) {
   return (
     <header>
       <div>
+      <img className="logo" src="../mainLogo.png" />
         {currentUser ?  (
           <>
-            <h1>Welcome, {currentUser.username}!</h1>
+            <h1 className="welcome" >Welcome, {currentUser.username}!</h1>
             <NavLink to="/bakers">Bakers</NavLink>
             <NavLink to="/favorites">My Favorites</NavLink>
-            <button onClick={logout}>Logout</button>
+            <button className="logout" onClick={logout}>Logout</button>
           </>
         ) : (
           <>
