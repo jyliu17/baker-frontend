@@ -3,6 +3,7 @@ import Baker from "./Baker"
 import Search from "./Search"
 import NewBakerForm from "./NewBakerForm"
 
+
 function BakersList({ setShowForm, bakersState, bakerSearch, setBakerSearch, handleAddBaker, showForm, handleFormClick, onAdded, onRemoved, currentUser, favs }) {
 
   const bakersDisplay = bakersState.map((baker) => {
@@ -20,6 +21,7 @@ function BakersList({ setShowForm, bakersState, bakerSearch, setBakerSearch, han
     </div>
       <h1>Our Talented Bakers</h1>
       <br></br>
+      
       {bakersDisplay}
     </>
   )

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UpdateBakerForm from "./UpdateBakerForm"
+import styled from "styled-components"
 
 function BakerPage({handleUpdateBaker, currentUser}) {
 
@@ -56,11 +57,11 @@ const { name, location, contact, profile_image, expertise } = bakerObj;
         </div> : null }
   
           {pastries.map((p) => (
-            <div key={p.id}>
+            <Card key={p.id}>
               <h4>{p.name}</h4>
               <img src={p.image} alt={p.name} />
               <h5>{p.description}</h5>
-            </div>
+            </Card>
           ))}
         </div>
       </div>
@@ -69,3 +70,17 @@ const { name, location, contact, profile_image, expertise } = bakerObj;
 }
 
 export default BakerPage;
+
+const Card = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 200px;
+  height: 100px
+  margin: 10px
+  padding: 5px;
+  border: none;
+  :hover {
+      transform: scale(1.04);
+      box-shadow: 2px 5px white;
+  }
+`
